@@ -1,0 +1,194 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Description:
+//     I've considered the word "repeated" in the question as something appears continueously for two times and more, 
+//     that is to say, 'yaaax' should be 'yx', while 'yax' stays the same
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. scan from left to right, if meet with 'aa':
+//         overwrite them to '00', and
+//         overwrite any continued following 'a' to '0';
+//         if meet with #, it means the end
+//     2. move back to the left side
+//     3. scan from left to right, if meet any symbol X not equal to '0' or '#', then
+//         overwrite X to 0, and
+//         move left to the first '0', then overwrite it to X and then repeat step 3;
+//         if we meet with #, it means it's finished, goto step 4
+//     4. remove any '0' and #, and position the head to the output
+
+// Test Cases:
+//     [1]  aaa    =>    (empty)
+//     [2]  caaa    =>    c
+//     [3]  caa    =>    c
+//     [4]  aa    =>    (empty)
+
+// Known Issues:
+//     1. if input equals to "a", the output is correct but it's format may corrupts
+
+name: Erase repeated “a” within a word in alphabet {a,b,c}
+init: start0
+accept: halt1
+
+start0, a
+start0, a, >
+
+start0, b
+start0, b, >
+
+start0, c
+start0, c, >
+
+start0, _
+start1, #, <
+
+start1, a
+start1, a, <
+
+start1, b
+start1, b, <
+
+start1, c
+start1, c, <
+
+start1, _
+start, #, -
+
+start, #
+adect, #, >
+
+adect, c
+adect, c, >
+
+adect, b
+adect, b, >
+
+adect, a
+repadect, a, >
+
+adect, #
+ml, #, <
+
+repadect, b
+adect, b, >
+
+repadect, c
+adect, c, >
+
+repadect, a
+fsta, 0, <
+
+fsta, a
+rmrepa, 0, >
+
+rmrepa, a
+rmrepa, 0, >
+
+rmrepa, 0
+rmrepa, 0, >
+
+rmrepa, b
+adect, b, >
+
+rmrepa, c
+adect, c, >
+
+rmrepa, #
+fini, _, <
+
+ml, b
+ml, b, <
+
+ml, c
+ml, c, <
+
+ml, 0
+ml, 0, <
+
+ml, #
+mrbc, #, >
+
+mrbc, 0
+mrbc, 0, >
+
+mrbc, b
+gotb, 0, <
+
+gotb, b
+gotb, b, <
+
+gotb, c
+gotb, c, <
+
+gotb, 0
+gotb, 0, <
+
+gotb, #
+mrb, #, >
+
+mrb, b
+mrb, b, >
+
+mrb, c
+mrb, c, >
+
+mrb, 0
+mrbc, b, >
+
+mrbc, c
+gotc, 0, <
+
+gotc, c
+gotc, c, <
+
+gotc, b
+gotc, b, <
+
+gotc, 0
+gotc, 0, <
+
+gotc, #
+mrc, #, >
+
+mrc, c
+mrc, c, >
+
+mrc, b
+mrc, b, >
+
+mrc, 0
+mrbc, c, >
+
+mrbc, #
+fini, #, <
+
+fini, b
+fini, b, <
+
+fini, c
+fini, c, <
+
+fini, 0
+fini, #, <
+
+fini, #
+halt0, _, >
+
+halt0, a
+halt0, a, >
+
+halt0, b
+halt0, b, >
+
+halt0, c
+halt0, c, >
+
+halt0, #
+halt0, _, >
+
+halt0, _
+halt1, _, <
+
+halt1, _
+halt1, _, <

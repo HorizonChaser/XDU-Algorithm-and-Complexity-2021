@@ -1,0 +1,87 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. scan from left to right, and perform replacing according following rules:
+//         'aa' -> 'aa'    'bb' -> 'bb'    'ab' -> 'ba'    'ba' -> 'ab'
+//         if meet with #, it means finished; otherwise repeat step 1
+//     2. remove any # on the tape, and re-position the head to the output
+
+// Test Cases:
+//     [1]  a    =>    a
+//     [2]  aba    =>    baa
+//     [3]  abba    =>    baab
+
+name: Replace odd and even letters of a word in alphabet {a,b}
+init: start0
+accept: halt, halt0
+
+start0, a
+start0, a, >
+
+start0, b
+start0, b, >
+
+start0, _
+start1, #, <
+
+start1, a
+start1, a, <
+
+start1, b
+start1, b, <
+
+start1, _
+start, #, -
+
+start, #
+dect, #, >
+
+dect, a
+typea, a, >
+
+dect, b
+typeb, b, >
+
+dect, #
+halt0, _, <
+
+typea, a
+dect, a, >
+
+typea, #
+halt0, _, <
+
+typea, b
+typeab, a, <
+
+typeab, a
+abr, b, >
+
+abr, a
+dect, a, >
+
+typeb, b
+dect, b, >
+
+typeb, a
+typeba, b, <
+
+typeba, b
+bar, a, >
+
+bar, b
+dect, b, >
+
+typeb, #
+halt0, _, <
+
+halt0, a
+halt0, a, <
+
+halt0, b
+halt0, b, <
+
+halt0, #
+halt, _, >

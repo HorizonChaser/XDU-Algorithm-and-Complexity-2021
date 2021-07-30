@@ -1,0 +1,114 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. scan from left to right, and
+//         if meet with 'c', detect the next symbol:
+//             if it's a, replace it with @ and move to the rightmost and write 1, then move back and replace the @ with 1, then detect the next
+//         if meet with #, it means finished, goto step2 to do the cleaning
+//     2. remove any unused # on the tape, and re-position the head to the putput
+
+// Test Cases:
+//     [1]  ccaaccaa    =>    ccaaccaa#1111
+//     [2]  aacaa    =>    aacaa#11
+
+name: Count the number of “a” written after “c”
+init: start0
+accept: halt
+
+start0, a
+start0, a, >
+
+start0, b
+start0, b, >
+
+start0, c
+start0, c, >
+
+start0, _
+start1, #, <
+
+start1, a
+start1, a, <
+
+start1, b
+start1, b, <
+
+start1, c
+start1, c, <
+
+start1, _
+start, #, -
+
+start, #
+dect, #, >
+
+dect, a
+dect, a, >
+
+dect, c
+typec, c, >
+
+dect, #
+fini, #, <
+
+typec, c
+typec, c, >
+
+typec, a
+rtmst, @, >
+
+typec, #
+fini, #, <
+
+rtmst, a
+rtmst, a, >
+
+rtmst, c
+rtmst, c, >
+
+rtmst, #
+rtmst, #, >
+
+rtmst, 1
+rtmst, 1, >
+
+rtmst, _
+back, 1, <
+
+back, 1
+back, 1, <
+
+back, #
+back, #, <
+
+back, a
+back, a, <
+
+back, c
+back, c, <
+
+back, @
+typec, @, >
+
+fini, @
+fini, a, <
+
+fini, a
+fini, a, <
+
+fini, c
+fini, c, <
+
+fini, #
+halt0, _, >
+
+halt0, a
+halt0, a, >
+
+halt0, c
+halt0, c, >
+
+halt0, #
+halt, #, >

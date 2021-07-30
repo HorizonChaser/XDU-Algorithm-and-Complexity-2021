@@ -1,0 +1,196 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. replace any symbol on odd position with '0'
+//     2. gather the valid symbols (which isn't equal to '0' ot '#') in the same way we used before
+//     3. remove any # on the tape, and re-position the head to the putput
+
+// Test Cases:
+//     [1]  aacaca    =>    aaa
+//     [2]  ac    => a
+
+// Known Issue:
+//     1. wong answer for input of one character
+
+name: Erase odd symbols of a word in alphabet {a,b,c}
+init: start0
+accept: halt
+
+start0, a
+start0, a, >
+
+start0, b
+start0, b, >
+
+start0, c
+start0, c, >
+
+start0, _
+start1, #, <
+
+start1, a
+start1, a, <
+
+start1, b
+start1, b, <
+
+start1, c
+start1, c, <
+
+start1, _
+start, #, -
+
+start, #
+rm1, #, >
+
+rm1, a
+psrv, 0, >
+
+rm1, b
+psrv, 0, >
+
+rm1, c
+psrv, 0, >
+
+rm1, #
+back, #, <
+
+psrv, a
+rm1, a, >
+
+psrv, b
+rm1, b, >
+
+psrv, c
+rm1, c, >
+
+back, a
+back, a, <
+
+back, b
+back, b, <
+
+back, c
+back, c, <
+
+back, 0
+back, 0, <
+
+back, #
+mrbc, #, >
+
+mrbc, 0
+mrbc, 0, >
+
+mrbc, a
+gota, 0, <
+
+gota, a
+gota, a, <
+
+gota, b
+gota, b, <
+
+gota, c
+gota, c, <
+
+gota, 0
+gota, 0, <
+
+gota, #
+mra, #, >
+
+mra, a
+mra, a, >
+
+mra, b
+mra, b, >
+
+mra, c
+mra, c, >
+
+mra, 0
+mrbc, a, >
+
+mrbc, b
+gotb, 0, <
+
+gotb, a
+gotb, a, <
+
+gotb, b
+gotb, b, <
+
+gotb, c
+gotb, c, <
+
+gotb, 0
+gotb, 0, <
+
+gotb, #
+mrb, #, >
+
+mrb, a
+mrb, a, >
+
+mrb, b
+mrb, b, >
+
+mrb, c
+mrb, c, >
+
+mrb, 0
+mrbc, b, >
+
+mrbc, c
+gotc, 0, <
+
+gotc, c
+gotc, c, <
+
+gotc, b
+gotc, b, <
+
+gotc, a
+gotc, a, <
+
+gotc, 0
+gotc, 0, <
+
+gotc, #
+mrc, #, >
+
+mrc, c
+mrc, c, >
+
+mrc, b
+mrc, b, >
+
+mrc, a
+mrc, a, >
+
+mrc, 0
+mrbc, c, >
+
+mrbc, #
+fini, _, <
+
+fini, a
+fini, a, <
+
+fini, b
+fini, b, <
+
+fini, c
+fini, c, <
+
+fini, 0
+fini, _, <
+
+fini, #
+halt0, _, -
+
+halt0, _
+halt, _, >

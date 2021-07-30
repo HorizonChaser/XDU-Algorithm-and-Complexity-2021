@@ -1,0 +1,117 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     nearly the same as what we used to calculate the "Division by 2 in unary system",
+//     the only point different is to change any "111" to "001" when scanning from the left to right
+
+// Test Cases:
+//     [1]  111111    =>    11
+//     [2]  111    =>    1
+
+
+name: Division by 3 in unary system
+init: start0
+accept: halt
+
+start0, 1
+start0, 1, >
+
+start0, _
+start1, #, <
+
+start1, 1
+start1, 1, <
+
+start1, _
+start, #, -
+
+start, #
+rm, #, >
+
+rm, 0
+err, 0, -
+
+rm, 1
+psrv, 0, >
+
+rm, #
+rtmst, #, <
+
+psrv, 0
+err, 0, -
+
+psrv, 1
+psrv2, 0, >
+
+psrv, #
+rtmst, #, <
+
+psrv2, 1
+rm, 1, >
+
+psrv2, 0
+err, 0, -
+
+rtmst, 1
+rtmst, 1, <
+
+rtmst, 0
+rtmst, 0, <
+
+rtmst, #
+lftmst, #, >
+
+lftmst, 0
+lkf1r, 0, >
+
+lkf1r, 0
+lkf1r, 0, >
+
+lkf1r, 1
+lkf0l, 0, <
+
+lkf0l, 1
+lkf0l, 1, <
+
+lkf0l, 0
+lkf0l, 0, <
+
+lkf0l, #
+lkf0lft, #, >
+
+lkf0lft, 1
+lkf0lft, 1, >
+
+lkf0lft, 0
+lkf1r, 1, >
+
+lkf1r, #
+fini, #, <
+
+fini, 0
+fini, #, <
+
+fini, 1
+halt0, 1, <
+
+halt0, 1
+halt0, 1, <
+
+halt0, #
+halt1, _, >
+
+halt1, 1
+halt1, 1, >
+
+halt1, #
+halt1, #, >
+
+halt1, _
+halt2, _, <
+
+halt2, #
+halt2, _, <
+
+halt2, 1
+halt, 1, -

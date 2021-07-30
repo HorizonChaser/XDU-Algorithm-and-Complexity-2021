@@ -1,0 +1,282 @@
+name: Convert an octal number into a binary number
+init: start
+accept: halt
+
+start, #
+got, #, >
+
+got, 0
+got0, @, >
+got, 1    
+got1, @, >
+got, 2    
+got2, @, >
+got, 3    
+got3, @, >
+got, 4
+got4, @, >
+got, 5
+got5, @, >
+got, 6
+got6, @, >
+got, 7
+got7, @, >
+got, @
+got, @, >
+
+got0, 0
+got0, 0, >
+got0, 1   
+got0, 1, >
+got0, 2   
+got0, 2, >
+got0, 3   
+got0, 3, >
+got0, 4   
+got0, 4, >
+got0, 5   
+got0, 5, >
+got0, 6   
+got0, 6, >
+got0, 7
+got0, 7, >
+got0, @
+got0, @, >
+got0, #
+got0, #, >
+got1, 0
+got1, 0, >
+got1, 1
+got1, 1, >
+got1, 2
+got1, 2, >
+got1, 3
+got1, 3, >
+got1, 4
+got1, 4, >
+got1, 5
+got1, 5, >
+got1, 6
+got1, 6, >
+got1, 7
+got1, 7, >
+got1, @
+got1, @, >
+got1, #
+got1, #, >
+got2, 0
+got2, 0, >
+got2, 1
+got2, 1, >
+got2, 2
+got2, 2, >
+got2, 3
+got2, 3, >
+got2, 4
+got2, 4, >
+got2, 5
+got2, 5, >
+got2, 6
+got2, 6, >
+got2, 7
+got2, 7, >
+got2, @
+got2, @, >
+got2, #
+got2, #, >
+got3, 0
+got3, 0, >
+got3, 1
+got3, 1, >
+got3, 2
+got3, 2, >
+got3, 3
+got3, 3, >
+got3, 4
+got3, 4, >
+got3, 5
+got3, 5, >
+got3, 6
+got3, 6, >
+got3, 7
+got3, 7, >
+got3, @
+got3, @, >
+got3, #
+got3, #, >
+got4, 0
+got4, 0, >
+got4, 1
+got4, 1, >
+got4, 2
+got4, 2, >
+got4, 3
+got4, 3, >
+got4, 4
+got4, 4, >
+got4, 5
+got4, 5, >
+got4, 6
+got4, 6, >
+got4, 7
+got4, 7, >
+got4, @
+got4, @, >
+got4, #
+got4, #, >
+got5, 0
+got5, 0, >
+got5, 1
+got5, 1, >
+got5, 2
+got5, 2, >
+got5, 3
+got5, 3, >
+got5, 4
+got5, 4, >
+got5, 5
+got5, 5, >
+got5, 6
+got5, 6, >
+got5, 7
+got5, 7, >
+got5, @
+got5, @, >
+got5, #
+got5, #, >
+got6, 0
+got6, 0, >
+got6, 1
+got6, 1, >
+got6, 2
+got6, 2, >
+got6, 3
+got6, 3, >
+got6, 4
+got6, 4, >
+got6, 5
+got6, 5, >
+got6, 6
+got6, 6, >
+got6, 7
+got6, 7, >
+got6, @
+got6, @, >
+got6, #
+got6, #, >
+got7, 0
+got7, 0, >
+got7, 1
+got7, 1, >
+got7, 2
+got7, 2, >
+got7, 3
+got7, 3, >
+got7, 4
+got7, 4, >
+got7, 5
+got7, 5, >
+got7, 6
+got7, 6, >
+got7, 7
+got7, 7, >
+got7, @
+got7, @, >
+got7, #
+got7, #, >
+
+got0, _
+wrt0b, 0, >
+wrt0b, _
+wrt0c, 0, >
+wrt0c, _
+back, 0, <
+
+got1, _
+wrt1b, 0, >
+wrt1b, _
+wrt1c, 0, >
+wrt1c, _
+back, 1, <
+
+got2, _
+wrt2b, 0, >
+wrt2b, _
+wrt2c, 1, >
+wrt2c, _
+back, 0, <
+
+got3, _
+wrt3b, 0, >
+wrt3b, _
+wrt3c, 1, >
+wrt3c, _
+back, 1, <
+
+got4, _
+wrt4b, 1, >
+wrt4b, _
+wrt4c, 0, >
+wrt4c, _
+back, 0, <
+
+got5, _
+wrt5b, 1, >
+wrt5b, _
+wrt5c, 0, >
+wrt5c, _
+back, 1, <
+
+got6, _
+wrt6b, 1, >
+wrt6b, _
+wrt6c, 1, >
+wrt6c, _
+back, 0, <
+
+got7, _
+wrt7b, 1, >
+wrt7b, _
+wrt7c, 1, >
+wrt7c, _
+back, 1, <
+
+back, 0
+back, 0, <
+back, 1   
+back, 1, <
+back, 2   
+back, 2, <
+back, 3   
+back, 3, <
+back, 4   
+back, 4, <
+back, 5   
+back, 5, <
+back, 6   
+back, 6, <
+back, 7
+back, 7, <
+back, #
+back, #, <
+
+back, @
+got, @, >
+
+got, #
+fini, _, <
+
+fini, @
+fini, _, <
+
+fini, #
+halt0, _, >
+
+halt0, _
+halt0, _, >
+
+halt0, 0
+halt, 0, -
+
+halt0, 1
+halt, 1, -

@@ -1,0 +1,202 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Description:
+//     the input character should be in alphabet {a, b, c}
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. encode {a, b, c} to {x, y, z}, and calculate one third of the input length on the right represented in unary system
+//     2. remove a '1' from the right, and then replace those symbols on the edge with #
+            until no '1' is left
+//     3. decode {x, y, z} to {a, b, c} and do the clean
+
+name: Middle part of a word divided in 3 parts
+init: start0
+accept: halt
+
+start0, a
+start0, a, >
+
+start0, b
+start0, b, >
+
+start0, c
+start0, c, >
+
+start0, _
+start1, #, <
+
+start1, a
+start1, a, <
+
+start1, b
+start1, b, <
+
+start1, c
+start1, c, <
+
+start1, _
+start, #, -
+
+start, #
+cnt1, #, >
+
+cnt1, a
+cnt2, x, >
+
+cnt1, b
+cnt2, y, >
+
+cnt1, c
+cnt2, z, >
+
+cnt2, a
+cnt3, x, >
+
+cnt2, b
+cnt3, y, >
+
+cnt2, c
+cnt3, z, >
+
+cnt3, a
+wrt1, x, >
+
+cnt3, b
+wrt1, y, >
+
+cnt3, c
+wrt1, z, >
+
+wrt1, a
+wrt1, a, >
+
+wrt1, b
+wrt1, b, >
+
+wrt1, c
+wrt1, c, >
+
+wrt1, 1
+wrt1, 1, >
+
+wrt1, #
+wrt1, #, >
+
+wrt1, _
+back, 1, -
+
+back, 1
+back, 1, <
+
+back, a
+back, a, <
+
+back, b
+back, b, <
+
+back, c
+back, c, <
+
+back, #
+back, #, <
+
+back, x
+cnt1, x, >
+
+back, y
+cnt1, y, >
+
+back, z
+cnt1, z, >
+
+cnt1, #
+lkf1r, #, >
+
+lkf1r, x
+lkf1r, x, >
+
+lkf1r, y
+lkf1r, y, >
+
+lkf1r, z
+lkf1r, z, >
+
+lkf1r, 1
+lkf1r, 1, >
+
+lkf1r, #
+lkf1r, #, >
+
+lkf1r, _
+del1, _, <
+
+del1, 1
+rmr, _, <
+
+rmr, 1
+rmr, 1, <
+
+rmr, #
+rmr, #, <
+
+rmr, x
+ml, #, <
+
+rmr, y
+ml, #, <
+
+rmr, z
+ml, #, <
+
+ml, x
+ml, x, <
+
+ml, y
+ml, y, <
+
+ml, z
+ml, z, <
+
+ml, #
+rml, #, >
+
+rml, x
+lkf1r, #, -
+
+rml, y
+lkf1r, #, -
+
+rml, z
+lkf1r, #, -
+
+del1, #
+fini, _, <
+
+fini, #
+fini, _, <
+
+fini, x
+fini, a, <
+
+fini, y
+fini, b, <
+
+fini, z
+fini, c, <
+
+fini, _
+halt0, _, >
+
+halt0, _
+halt0, _, >
+
+halt0, a
+halt, a, -
+
+halt0, b
+halt, b, -
+
+halt0, c
+halt, c, -

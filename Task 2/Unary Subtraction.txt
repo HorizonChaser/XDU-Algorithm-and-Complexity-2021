@@ -1,0 +1,103 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. go to the right end of the input
+//     2. remove the rightmost 1 of the subtractor
+//     3. go to the left end of the input
+//     4. remove the leftmost 1 of the minuend
+//     5. if step 1 found '#' is just next the operator '-', the calculation is now finished
+//     6. go to the right end of the input
+//     7. move to the left end of the input, and delete all the '#' along the way
+//     8. move the head to the first symbol of the output, then halt
+
+// Test Cases:
+//     [1]  1111-111    =>    1
+//     [2]  11111-111   =>    11
+
+// Known Issues:
+//     1. The result can't be negative
+//     2. The machine won't stop when the output should be 0
+
+name: Unary Subtraction
+init: start0
+accept: halt
+
+start0, 1
+start1, 1, <
+
+start1, _
+startr, #, >
+
+startr, 1
+startr, 1, >
+
+startr, -
+startr, -, >
+
+startr, _
+startl, #, <
+
+startl, 1
+startl, 1, <
+
+startl, -
+startl, -, <
+
+startl, #
+start, #, -
+
+start, #
+mr, #, >
+
+mr, 1
+mr, 1, >
+
+mr, -
+mr, -, >
+
+mr, #
+rtmst, #, <
+
+rtmst, 1
+ml, #, <
+
+rtmst, -
+halt0, #, -
+
+ml, 1
+ml, 1, <
+
+ml, -
+ml, -, <
+
+ml, #
+lftmst, #, >
+
+lftmst, 1
+mr, #, >
+
+halt0, #
+halt0, #, >
+
+halt0, 1
+halt0, 1, >
+
+halt0, _
+fini, _, <
+
+fini, #
+fini, _, <
+
+fini, 1
+fini, 1, <
+
+fini, _
+halt1, _, >
+
+halt1, _
+halt1, _, >
+
+halt1, 1
+halt, 1, -

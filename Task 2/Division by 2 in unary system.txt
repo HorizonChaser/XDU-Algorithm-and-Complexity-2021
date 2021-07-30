@@ -1,0 +1,123 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input, and back to left
+//     1. move right at two symbols a time, change '11' to '01' until reach the right end '#'
+//     2. move back to the left side, move right to look for the first 1 that we meet; 
+//         if meet '#', it means the calculation is now finished
+//     3. overwrite the 1 we met to 0, and move left until we meet the first 1, then move right and write 1;
+//         then go back to 2 until finished
+//     4. when finished, move to the rightmost '#', 
+//         and then move to the leftmost '#'  while deleting all the '#' along the way
+//     5. when meet a blank cell, it means all '#' has been removed, re-position the head to the first '1' then halt
+
+// Test Cases:
+//     [1]  11111    =>    11
+//     [2]  111111    =>    111
+
+// Known Issues:
+//    1. The input can't be 1, or the machine would reject it
+
+name: Division by 2 in unary system
+init: start0
+accept: halt
+
+start0, 1
+startr, 1, >
+
+startr, 1
+startr, 1, >
+
+startr, _
+startl, #, <
+
+startl, 1
+startl, 1, <
+
+startl, _
+start, #, -
+
+start, #
+rm, #, >
+
+rm, 0
+err, 0, -
+
+rm, 1
+psrv, 0, >
+
+rm, #
+rtmst, #, <
+
+psrv, 0
+err, 0, -
+
+psrv, 1
+rm, 1, >
+
+psrv, #
+rtmst, #, <
+
+rtmst, 1
+rtmst, 1, <
+
+rtmst, 0
+rtmst, 0, <
+
+rtmst, #
+lftmst, #, >
+
+lftmst, 0
+lkf1r, 0, >
+
+lkf1r, 0
+lkf1r, 0, >
+
+lkf1r, 1
+lkf0l, 0, <
+
+lkf0l, 1
+lkf0l, 1, <
+
+lkf0l, 0
+lkf0l, 0, <
+
+lkf0l, #
+lkf0lft, #, >
+
+lkf0lft, 1
+lkf0lft, 1, >
+
+lkf0lft, 0
+lkf1r, 1, >
+
+lkf1r, #
+fini, #, <
+
+fini, 0
+fini, #, <
+
+fini, 1
+halt0, 1, -
+
+halt0, 1
+halt0, 1, >
+
+halt0, #
+halt0, #, >
+
+halt0, _
+clr, _, <
+
+clr, #
+clr, _, <
+
+clr, 1
+clr, 1, <
+
+clr, _
+halt1, _, >
+
+halt1, _
+halt, _, >

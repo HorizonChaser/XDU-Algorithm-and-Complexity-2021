@@ -1,0 +1,106 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Description
+//     the output is represented in unary system behind the input, and separated by a blank cell
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. scan from left to right, and replace the first met '0' with '@', then
+//         move right until reach a blank cell, write 1, then 
+//         move left back until meet with '@', replace it with '0', and repeat step 1;
+//         if meet with #, it means finished
+//     2. remove any # on the tape, and re-position the head to the output
+
+// Test Cases:
+//     [1]  11011001    =>    11011001 111
+//     [2]  111    =>    111 (blank cell, because there is no '0' in the input)
+//     [3]  0    =>    0 1 
+
+name: Count number of zeroes in a binary number
+init: start0
+accept: halt
+
+start0, 0
+start0, 0, >
+
+start0, 1
+start0, 1, >
+
+start0, _
+start1, #, <
+
+start1, 0
+start1, 0, <
+
+start1, 1
+start1, 1, <
+
+start1, _
+start, #, -
+
+start, #
+lkf0r, #, >
+
+lkf0r, 1
+lkf0r, 1, >
+
+lkf0r, #
+nlim, #, >
+
+lkf0r, 0
+cnt, @, >
+
+cnt, 0
+cnt, 0, >
+
+cnt, 1
+cnt, 1, >
+
+cnt, #
+cnt, #, >
+
+cnt, _
+back, 1, <
+
+back, 0
+back, 0, <
+
+back, 1
+back, 1, <
+
+back, #
+back, #, <
+
+back, @
+lkf0r, 0, >
+
+nlim, 1
+nlim, 1, >
+
+nlim, _
+halt0, _, <
+
+halt0, 0
+halt0, 0, <
+
+halt0, 1
+halt0, 1, <
+
+halt0, #
+halt0, #, <
+
+halt0, _
+halt1, _, >
+
+halt1, #
+halt1, _, >
+
+halt1, 0
+halt1, 0, >
+
+halt1, 1
+halt1, 1, >
+
+halt1, _
+halt, _, <

@@ -1,0 +1,77 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//    nearly the same as the one used in "multiplication by 2 in unary system", 
+//    but when we overwrite the right '#', we would write two 'b', instead of one
+
+// Test Cases:
+//    [1]  11    =>    111111
+//    [2]  1    =>    111
+
+name: Multiplication by 3 in unary system
+init: start0
+accept: halt
+
+start0, 1
+start0, 1, >
+
+start0, _
+start1, #, <
+
+start1, 1
+start1, 1, <
+
+start1, _
+start, #, -
+
+start, #
+rpa, #, >
+
+rpa, 1
+mvrt, a, >
+
+rpa, b
+fini_r, b, >
+
+mvrt, 1
+mvrt, 1, >
+
+mvrt, b
+mvrt, b, >
+
+mvrt, #
+nlim, b, >
+
+nlim, _
+nlim2, b, >
+
+nlim2, _
+mvl, #, <
+
+mvl, 1
+mvl, 1, <
+
+mvl, b
+mvl, b, <
+
+mvl, a
+rpa, a, >
+
+fini_r, #
+rpab, _, <
+
+fini_r, a
+fini_r, a, >
+
+fini_r, b
+fini_r, b, >
+
+rpab, b
+rpab, 1, <
+
+rpab, a
+rpab, 1, <
+
+rpab, #
+halt, _, >

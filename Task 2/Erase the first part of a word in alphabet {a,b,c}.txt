@@ -1,0 +1,197 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     nearly the same as the one used in earsing the second part of a word
+
+// Test Cases:
+//     [1]  abcabc    =>    abc
+//     [2]  aa    =>    a
+//     [3]  aacbbc    =>    aac
+
+name: Erase the first part of a word in alphabet {a,b,c}
+init: start0
+accept: halt, halt0
+
+start0, a
+start0, a, >
+
+start0, b
+start0, b, >
+
+start0, c
+start0, c, >
+
+start0, _
+start1, #, <
+
+start1, a
+start1, a, <
+
+start1, b
+start1, b, <
+
+start1, c
+start1, c, <
+
+start1, _
+start, #, -
+
+start, #
+cnt1, #, >
+
+cnt1, a
+cnt2, x, >
+
+cnt1, b
+cnt2, y, >
+
+cnt1, c
+cnt2, z, >
+
+cnt1, #
+lkf1r, #, >
+
+cnt2, a
+mr, x, >
+
+cnt2, b
+mr, y, >
+
+cnt2, c
+mr, z, >
+
+mr, 1
+mr, 1, >
+
+mr, b
+mr, b, >
+
+mr, a
+mr, a, >
+
+mr, c
+mr, c, >
+
+mr, #
+mr, #, >
+
+mr, _
+back, 1, <
+
+back, a
+back, a, <
+
+back, b
+back, b, <
+
+back, c
+back, c, <
+
+back, 1
+back, 1, <
+
+back, #
+back, #, <
+
+back, x
+cnt1, x, >
+
+back, y
+cnt1, y, >
+
+back, z
+cnt1, z, >
+
+lkf1r, 1
+lkf1r, 1, >
+
+lkf1r, #
+isfini, #, >
+
+lkf1r, _
+del1, _, <
+
+lkf1r, x
+lkf1r, x, >
+
+lkf1r, y
+lkf1r, y, >
+
+lkf1r, z
+lkf1r, z, >
+
+isfini, 1
+lkf1r, 1, >
+
+isfini, _
+fini, _, <
+
+isfini, #
+lkf1r, #, >
+
+del1, 1
+delxy, _, <
+
+delxy, 1
+delxy, 1, <
+
+delxy, x
+delxy, x, <
+
+delxy, y
+delxy, y, <
+
+delxy, z
+delxy, z, <
+
+delxy, #
+delxy2, #, <
+
+delxy2, 1
+delxy2, 1, <
+
+delxy2, x
+delxy2, x, <
+
+delxy2, y
+delxy2, y, <
+
+delxy2, z
+delxy2, z, <
+
+delxy2, #
+rm, #, >
+
+rm, x
+lkf1r, #, >
+
+rm, y
+lkf1r, #, >
+
+rm, z
+lkf1r, #, >
+
+fini, #
+fini, _, <
+
+fini, x
+fini, a, <
+
+fini, y
+fini, b, <
+
+fini, z
+fini, c, <
+
+fini, _
+halt0, _, >
+
+halt0, _
+halt0, _, >
+
+halt0, a
+halt, a, -
+
+halt0, b
+halt, b, -

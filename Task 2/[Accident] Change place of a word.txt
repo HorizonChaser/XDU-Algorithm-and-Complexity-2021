@@ -1,0 +1,75 @@
+name: change place
+init: start
+accept: halt
+
+start, #
+rtmst, 0, >
+
+rtmst, a
+rtmst, a, >
+
+rtmst, b
+rtmst, b, >
+
+rtmst, 0
+rtmst, 0, >
+
+rtmst, #
+mab, #, <
+
+mab, b
+mlb, #, <
+
+mab, a
+mla, #, <
+
+mab, 0
+halt, #, -
+
+mlb, a
+mlb, a, <
+
+mlb, b
+mlb, b, <
+
+mlb, 0
+midb, 0, <
+
+midb, _
+newb, b, <
+
+midb, a
+mlb, a, <
+
+midb, b
+mlb, b, <
+
+mlb, #
+newb, b, <
+
+newb, _
+rtmst, #, >
+
+mla, 0
+midc, 0, <
+
+midc, _
+newc, c, <
+
+midc, a
+mla, a, <
+
+midc, b
+mla, b, <
+
+mla, a
+mla, a, <
+
+mla, b
+mla, b, <
+
+mla, #
+newa, a, <
+
+newa, _
+rtmst, #, >

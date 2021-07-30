@@ -1,0 +1,158 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Description
+//     the word "repeated" is considered as something appears two times, 
+//     that is to say, 00 would be 001, and 0000 would be 001001 
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     0.5 replace the right # with @, and then move back to left side
+//     1. scan from left to right:
+//        if meet with 1, 
+//            replace it with #, and move right to a blank cell, write 1 and move left to #, then move right and repeat;
+//        if meet with 0, and
+//            if the next is also '0', replace these two 0 with ##, and move right to a blank cell and write 001, then move right and repeat;
+//            if the next is 1, replace this 0 with #, move right to a blank cell, write 1 and move left to #, then move right and repeat;
+//            if the next is @, it means finished, and goto step 2 to do the cleaning
+//      2. remove any @ and # on the tape, and re-position the head to the putput
+
+// Test Cases:
+//     [1]  1100    =>    11001
+//     [2]  00    =>    001
+//     [3]  0    =>    0
+//     [4]  1    =>    1
+
+
+name: Insert “1” after each repetition of “0” in binary number
+init: start0
+accept: halt, halt0
+
+start0, 1
+start0, 1, >
+
+start0, 0
+start0, 0, >
+
+start0, _
+start1, #, <
+
+start1, 0
+start1, 0, <
+
+start1, 1
+start1, 1, <
+
+start1, _
+start, #, -
+
+start, #
+rplim, #, >
+
+rplim, 1
+rplim, 1, >
+
+rplim, 0
+rplim, 0, >
+
+rplim, #
+back, @, <
+
+scan, 1
+rtmst1, #, >
+
+scan, 0
+type0, 0, >
+
+scan, @
+halt, #, -
+
+rtmst1, 1
+rtmst1, 1, >
+
+rtmst1, 0
+rtmst1, 0, >
+
+rtmst1, @
+rtmst1, @, >
+
+rtmst1, _
+back, 1, <
+
+back, 1
+back, 1, <
+
+back, 0
+back, 0, <
+
+back, @
+back, @, <
+
+back, #
+scan, #, >
+
+type0, 1
+rm0, 1, <
+
+rm0, 0
+rtmst0, #, >
+
+rtmst0, 0
+rtmst0, 0, >
+
+rtmst0, 1
+rtmst0, 1, >
+
+rtmst0, #
+rtmst0, #, >
+
+rtmst0, @
+rtmst0, @, >
+
+rtmst0, _
+back, 0, <
+
+type0, 0
+rm1st0, 0, <
+
+type0, @
+rm0, @, <
+
+rm0, 0
+rtmst0, #, >
+
+rm1st0, 0
+rm2nd0, #, >
+
+rm2nd0, 0
+rtmst00, #, >
+
+rtmst00, 1
+rtmst00, 1, >
+
+rtmst00, 0
+rtmst00, 0, >
+
+rtmst00, @
+rtmst00, @, >
+
+rtmst00, #
+rtmst00, #, >
+
+rtmst00, _
+wrt0, 0, >
+
+wrt0, _
+wrt1, 0, >
+
+wrt1, _
+back, 1, <
+
+halt, #
+halt, _, <
+
+halt, _
+halt0, _, >
+
+halt0, _
+halt0, _, >

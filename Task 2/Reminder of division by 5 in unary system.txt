@@ -1,0 +1,95 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. do a scan from the right to the left, and change all the '11111' to  '11110';
+//         if we meet with #, it means the end
+//     2. move left to the first 0 we meet, then delete anything from here to the left end
+//     3. delete the rightmost #, re-position the head to the answer and then halt
+
+// Test Cases:
+//    [1]  111111    =>    1
+//    [2]  11111    =>    (empty)
+
+name: Reminder of division by 5 in unary system
+init: start0
+accept: halt
+
+start0, 1
+start0, 1, >
+
+start0, _
+start1, #, <
+
+start1, 1
+start1, 1, <
+
+start1, _
+start, #, -
+
+start, #
+div1, #, >
+
+div1, 1
+div2, 1, >
+
+div2, 1
+div3, 1, >
+
+div2, #
+lkf0l, #, <
+
+div3, 1
+div4, 1, >
+
+div3, #
+lkf0l, #, <
+
+div4, 1
+div5, 1, >
+
+div4, #
+lkf0l, #, <
+
+div5, 1
+div1, 0, >
+
+div5, #
+lkf0l, #, <
+
+div1, #
+lkf0l, #, <
+
+lkf0l, 1
+lkf0l, 1, <
+
+lkf0l, 0
+fini, #, <
+
+lkf0l, #
+halt0, _, >
+
+fini, 1
+fini, #, <
+
+fini, 0
+fini, #, <
+
+fini, #
+halt0, _, >
+
+halt0, #
+halt0, _, >
+
+halt0, 1
+halt0, 1, >
+
+halt0, _
+halt1, _, <
+
+halt1, _
+halt, _, <
+
+halt1, 1
+halt, 1, -

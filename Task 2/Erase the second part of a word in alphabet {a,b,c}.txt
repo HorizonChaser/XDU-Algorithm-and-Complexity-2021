@@ -1,0 +1,143 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Description
+//     "the second part" is considered as the right part of the input, 
+//      that is to say, "aaabbb" would become "aaa"
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. scan from left to right, and for every two words, we add a '1' at the right end
+//         therefor, we obtain half of the length of the input represented in unary system
+//         if reach the #, goto step2, else repeat step1
+//     2. remove one '1' on the right, then remove the first character in {a,b,c} while moving left, then return right and repeat
+            if no '1' left, it means the second part has been removed
+//     3. remove all # and re-position the head to the output
+
+// Test Cases:
+//     [1]  abcabc    =>    abc
+//     [2]  aa    =>    a
+
+name: Erase the second part of a word in alphabet {a,b,c}
+init: start
+accept: halt
+
+start, #
+cnt1, #, >
+
+cnt1, a
+cnt2, x, >
+
+cnt1, b
+cnt2, y, >
+
+cnt1, c
+cnt2, z, >
+
+cnt1, #
+lkf1r, #, >
+
+cnt2, a
+mr, x, >
+
+cnt2, b
+mr, y, >
+
+cnt2, c
+mr, z, >
+
+mr, 1
+mr, 1, >
+
+mr, b
+mr, b, >
+
+mr, a
+mr, a, >
+
+mr, c
+mr, c, >
+
+mr, #
+mr, #, >
+
+mr, _
+back, 1, <
+
+back, a
+back, a, <
+
+back, b
+back, b, <
+
+back, c
+back, c, <
+
+back, 1
+back, 1, <
+
+back, #
+back, #, <
+
+back, x
+cnt1, x, >
+
+back, y
+cnt1, y, >
+
+back, z
+cnt1, z, >
+
+lkf1r, 1
+lkf1r, 1, >
+
+lkf1r, #
+isfini, #, >
+
+lkf1r, _
+del1, _, <
+
+isfini, 1
+lkf1r, 1, >
+
+isfini, _
+fini, _, <
+
+isfini, #
+lkf1r, #, >
+
+del1, 1
+delxy, _, <
+
+delxy, 1
+delxy, 1, <
+
+delxy, #
+delxy, #, <
+
+delxy, x
+lkf1r, #, >
+
+delxy, y
+lkf1r, #, >
+
+delxy, z
+lkf1r, #, >
+
+fini, #
+fini, _, <
+
+fini, x
+fini, a, <
+
+fini, y
+fini, b, <
+
+fini, z
+fini, c, <
+
+fini, _
+halt0, _, >
+
+halt0, _
+halt, _, >

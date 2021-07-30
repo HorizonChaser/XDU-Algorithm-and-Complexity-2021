@@ -1,0 +1,111 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. calculate half of the input length and write it on the right side of the input, using previous method
+//         and during this process, encode 'a' into 'x', 'b' into 'y'
+//     1. for each '1' on the right side, get the leftmost symbol X and replace that '1' with X, 
+//         until no more '1' is left
+//     2. move to the leftmost symbol, while decoding 'x' to 'a' and 'y' to 'b'
+//         when reaches a black cell, move right and halt
+
+// Test Cases:
+//     [1]  abaaaa     =>    aaaaba
+//     [2]  ab    =>    ba
+
+name: Replace left and right parts of a word in alphabet {a,b}
+init: cnt1
+accept: halt
+
+cnt1, a
+cnt2, x, >
+
+cnt1, b
+cnt2, y, >
+
+cnt2, a
+wrt1, x, >
+
+cnt2, b
+wrt1, y, >
+
+wrt1, a
+wrt1, a, >
+
+wrt1, b
+wrt1, b, >
+
+wrt1, 1
+wrt1, 1, >
+
+wrt1, _
+back, 1, <
+
+back, a
+back, a, <
+
+back, b
+back, b, <
+
+back, 1
+back, 1, <
+
+back, x
+cnt1, x, >
+
+back, y
+cnt1, y, >
+
+cnt1, 1
+lkfxyl, 1, -
+
+lkfxyl, x
+lkfxyl, x, <
+
+lkfxyl, y
+lkfxyl, y, <
+
+lkfxyl, 1
+lkfxyl, 1, <
+
+lkfxyl, _
+got, _, >
+
+got, x
+gotx, _, >
+
+got, y
+goty, _, >
+
+gotx, x
+gotx, x, >
+
+gotx, y
+gotx, y, >
+
+gotx, 1
+isfini, x, >
+
+goty, x
+goty, x, >
+
+goty, y
+goty, y, >
+
+goty, 1
+isfini, y, >
+
+isfini, 1
+lkfxyl, 1, -
+
+isfini, _
+halt0, _, <
+
+halt0, x
+halt0, a, <
+
+halt0, y
+halt0, b, <
+
+halt0, _
+halt, _, >

@@ -1,0 +1,306 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. scan from left to right, and
+//         if meet with 'abc', replace it with '0cc';
+//         if meet with #, it means all 'abc' have been replaced, move back to the leftmost #
+//     2. scan from left to right, and
+//         if meet with symbol X which isn't equal to 0, replace it with 0, and search left for the first 0, replace that 0 with X and repeat step 2
+//         if meet with #, it means all symbols have ben gathered, goto step3 to clean
+//     3.  remove any '0' and #, and position the head to the output, then halt
+
+// Test Cases:
+//     [1]  abcaac    =>    ccaac
+//     [2]  ab     =>    ab
+//     [3]  abc    =>    cc
+
+// State Diagram:
+//    enclosed with the name "Var14 State Diagram.png"
+
+
+name: Replace “abc” by “cc” within a word in alphabet {a,b,c}
+init: start0
+accept: halt
+
+// State: start0
+// Discription: move to the right end and add delimiter '#'
+
+start0, a
+start0, a, >
+
+start0, b
+start0, b, >
+
+start0, c
+start0, c, >
+
+start0, _
+start1, #, <
+
+// State: start1
+// Discription: move to the left end and add delimiter '#'
+
+start1, a
+start1, a, <
+
+start1, b
+start1, b, <
+
+start1, c
+start1, c, <
+
+start1, _
+start, #, -
+
+// State: start
+// Discription: the initial starting state when delimiters # are provided with the input
+
+start, #
+typeA, #, >
+
+// State: typeA
+// Discription: detect if the current symbol matches 'a' in pattern 'abc';
+//                   if meet with #, it means we have reached the end of input, move back to left end
+
+typeA, b
+typeA, b, >
+
+typeA, c
+typeA, c, >
+
+typeA, a
+typeAB, a, >
+
+typeA, #
+mL, #, <
+
+// State: typeAB
+// Discription: detect if the current symbol matches 'b' in pattern 'abc';
+//                   if meet with #, it means we have reached the end of input, move back to left end
+
+typeAB, a
+typeA, a, -
+
+typeAB, c
+typeA, c, -
+
+typeAB, #
+mL, #, <
+
+typeAB, b
+typeABC, b, >
+
+// State: typeABC
+// Discription: detect if the current symbol matches 'c' in pattern 'abc', if so, then prepare overwrite 'abc' to '0cc';
+//                   if meet with #, it means we have reached the end of input, move back to left end
+
+typeABC, a
+typeA, a, >
+
+typeABC, b
+typeA, b, >
+
+typeABC, c
+mvL, c, <
+
+typeABC, #
+mL, #, <
+
+// State: mvL
+// Discription: mvL, abbreviation for "move Left". move one symbol left
+//                   when this state is ended, 'a' of 'abc' should be under the head
+
+mvL, b
+rmA, b, <
+
+// State: rmA
+// Discription: rmA, abbreviation for "remove a". replace 'a' with '0' under the head
+
+rmA, a
+rmB, 0, >
+
+// State: rmB
+// Discription: rmB, abbreviation for "remove b". replace 'b' with '0' under the head;
+//                   '0' stands for removed and unused cell
+//                   after that, go back to state 'typeA' for following searching process
+
+rmB, b
+typeA, c, >
+
+// State: mL
+// Discription: mL, abbreviation for "move Left". move left to the left end
+
+mL, a
+mL, a, <
+
+mL, b
+mL, b, <
+
+mL, c
+mL, c, <
+
+mL, 0
+mL, 0, <
+
+mL, #
+mvABC, #, >
+
+// State: mvABC
+// Discription: mvABC, abbreviation for "move a, b and c"
+//                   gather all remaining a, b and c together
+//                   when meet with #, it means finished
+
+mvABC, 0
+mvABC, 0, >
+
+mvABC, #
+mvR, #, >
+
+mvABC, a
+gotA, 0, <
+
+mvABC, b
+gotB, 0, <
+
+mvABC, c
+gotC, 0, <
+
+// State: gotB
+// Discription: we have found a symbol B, now going back to find the leftmost '0' to be overwritten
+
+gotB, b
+gotB, b, <
+
+gotB, a
+gotB, a, <
+
+gotB, c
+gotB, c, <
+
+gotB, 0
+gotB, 0, <
+
+gotB, #
+mrB, #, >
+
+// State: mrB
+// Discription: mvB, abbreviation for "moving right with B"
+//                   write 'b' into the first '0' we meet while scanning right
+mrB, b
+mrB, b, >
+
+mrB, c
+mrB, c, >
+
+mrB, a
+mrB, a, >
+
+mrB, 0
+mvABC, b, >
+
+// State: gotC
+// Discription: we have found a symbol c, now going back to find the leftmost '0' to be overwritten
+
+gotC, c
+gotC, c, <
+
+gotC, b
+gotC, b, <
+
+gotC, 0
+gotC, 0, <
+
+gotC, a
+gotC, a, <
+
+gotC, #
+mrC, #, >
+
+// State: mrC
+// Discription: mvB, abbreviation for "moving right with C"
+//                   write 'c' into the first '0' we meet while scanning right
+
+mrC, c
+mrC, c, >
+
+mrC, b
+mrC, b, >
+
+mrC, a
+mrC, a, >
+
+mrC, 0
+mvABC, c, >
+
+// State: gotA
+// Discription: we have found a symbol A, now going back to find the leftmost '0' to be overwritten
+
+gotA, a
+gotA, a, <
+
+gotA, b
+gotA, b, <
+
+gotA, c
+gotA, c, <
+
+gotA, 0
+gotA, 0, <
+
+gotA, #
+mrA, #, >
+
+// State: mrA
+// Discription: mvA, abbreviation for "moving right with A"
+//                   write 'a' into the first '0' we meet while scanning right
+
+mrA, a
+mrA, a, >
+
+mrA, b
+mrA, b, >
+
+mrA, c
+mrA, c, >
+
+mrA, 0
+mvABC, a, >
+
+// State: mvR
+// Discription: mvR, abbreviation for "moving to right  end"
+//                  move right until reach a blank cell
+
+mvR, #
+mvR, #, >
+
+mvR, _
+clean, _, <
+
+// State: clean
+// Discription: clean the tape, replace any '0' or '#' with blank until reach a blank cell
+
+clean, #
+clean, _, <
+
+clean, 0
+clean, _, <
+
+clean, a
+clean, a, <
+
+clean, b
+clean, b, <
+
+clean, c
+clean, c, <
+
+clean, _
+halt, _, >
+
+// State: halt
+// Discription: move right when reading a blank cell, then halt
+
+halt, _
+halt, _, >

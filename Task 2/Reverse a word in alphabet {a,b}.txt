@@ -1,0 +1,150 @@
+// Using online simulator from
+// https://turingmachinesimulator.com/
+
+// Algorithm:
+//     0. add delimiters '#' on the both sides of the input
+//     1. move to the right #, overwrite it to '0'
+//     2. then move left to first symbol X which isn't equal to '0';
+//         if meet with #, it means all 'a' and 'b' have been replaced, goto step 4 to start cleaning uncessary # and '0'
+//     3. overwrite X to '0', then move right until the first blank cell, write X then move right and write #, then goto step 2
+//     4. move to the rightmost #, and overwrite all the '0' to # along the way
+//     5. delete the rightmost #, then move left, delete all the # we meet with until reach an empty cell
+//     6. move right until reach 'a' or 'b', then halt
+
+// Test Cases:
+//    [1]  abbaa    =>    aabba
+//    [2]  a    =>    a
+
+
+name: Reverse a word in alphabet {a,b}
+init: start0
+accept: halt
+
+start0, a
+start0, a, >
+
+start0, b
+start0, b, >
+
+start0, _
+start1, #, <
+
+start1, a
+start1, a, <
+
+start1, b
+start1, b, <
+
+start1, _
+start, #, -
+
+start, #
+rtmst, #, >
+
+rtmst, a
+rtmst, a, >
+
+rtmst, b
+rtmst, b, >
+
+rtmst, #
+mab, 0, <
+
+mab, a
+mra, 0, >
+
+mab, b
+mrb, 0, >
+
+mra, a
+mra, a, >
+
+mra, b
+mra, b, >
+
+mra, 0
+mra, 0, >
+
+mra, _
+nlim, a, >
+
+mra, #
+nlim, a, >
+
+mrb, a
+mrb, a, >
+
+mrb, b
+mrb, b, >
+
+mrb, 0
+mrb, 0, >
+
+mrb, _
+nlim, b, >
+
+mrb, #
+nlim, b, >
+
+nlim, _
+lkf0l, #, <
+
+lkf0l, a
+lkf0l, a, <
+
+lkf0l, b
+lkf0l, b, <
+
+lkf0l, 0
+lkfab, 0, <
+
+lkfab, 0
+lkfab, 0, <
+
+lkfab, a
+mab, a, -
+
+lkfab, b
+mab, b, -
+
+lkfab, #
+fini, #, >
+
+fini, 0
+fini, #, >
+
+fini, a
+halt0, a, -
+
+fini, b
+halt0, b, -
+
+halt0, a
+halt0, a, >
+
+halt0, b
+halt0, b, >
+
+halt0, #
+halt1, _, <
+
+halt1, a
+halt1, a, <
+
+halt1, b
+halt1, b, <
+
+halt1, #
+halt1, _, <
+
+halt1, _
+halt2, _, >
+
+halt2, _
+halt2, _, >
+
+halt2, a
+halt, a, -
+
+halt2, b
+halt, b, -
